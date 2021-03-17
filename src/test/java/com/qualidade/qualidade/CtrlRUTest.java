@@ -3,6 +3,7 @@ package com.qualidade.qualidade;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
@@ -65,13 +66,11 @@ class CtrlRUTest {
 		Receita receita = listaDeReceitas.getArrayList().get(0);
 		TipoID idReceita = receita.getID();
 
-		ctrl.cadastrarDadosReceita(idReceita, "test", "modo preparo", 1, 200);
-		Receita receitaAtualizada = listaDeReceitas.obterReceita(idReceita);
-
-		assertEquals("test", receitaAtualizada.getNome());
-		assertEquals("modo preparo", receitaAtualizada.getModoPreparo());
-		assertEquals(1, receitaAtualizada.getNoPorcoes());
-		assertEquals(200, receitaAtualizada.getValorCalorico());
+		
+		Exception exception = assertThrows(Exception.class, () -> {
+			ctrl.cadastrarDadosReceita(idReceita, "test", "modo preparo", 1, 200);
+		});
+		
 
 	}
 	
