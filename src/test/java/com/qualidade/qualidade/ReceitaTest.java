@@ -35,44 +35,5 @@ class ReceitaTest {
 		assertEquals(1, rec.getIngredientes().remove(0).getID().get());
 	}
 	
-	@Test
-	void deveRemoverIngrediente() 
-	{
-		assertTrue(rec.getIngredientes().isEmpty());
-		rec.adicionarIngrediente(item, 43, "kg");
-		rec.adicionarIngrediente(item, 231, "mg");
-		rec.removerIngredientes();
-		assertTrue(rec.getIngredientes().isEmpty());
-	}
-	
-	@Test
-	void deveManterEstoqueSemIngrediente() 
-	{
-		rec.atualizarEstoque("adicionar", 100);
-		assertTrue(rec.ingredientesDisponiveisNoEstoque(99));
-		assertTrue(rec.ingredientesDisponiveisNoEstoque(1));
-		assertFalse(rec.ingredientesDisponiveisNoEstoque(125));		
-	}
-	
-	@Test
-	void deveManterEstoqueComIngrediente()
-	{
-		rec.adicionarIngrediente(item, 10, "mg");
-		rec.atualizarEstoque("adicionar", 100);
-		assertTrue(rec.ingredientesDisponiveisNoEstoque(99));
-		assertTrue(rec.ingredientesDisponiveisNoEstoque(1));
-		assertFalse(rec.ingredientesDisponiveisNoEstoque(105));	
-	}
-	
-	@Test
-	void deveCalcularCusto()
-	{
-		rec.adicionarIngrediente(item, 10, "kg");	
-		assertEquals(2500 ,rec.obterCusto(25));
-		rec.atualizarEstoque("adicionar", 100);
-		assertEquals(27500 ,rec.obterCusto(25));
-		
-	}
-	
 	
 }

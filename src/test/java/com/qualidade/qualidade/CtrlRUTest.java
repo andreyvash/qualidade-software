@@ -1,6 +1,7 @@
 package com.qualidade.qualidade;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -32,9 +33,13 @@ class CtrlRUTest {
 		ListaDeReceitas listaDeReceitas = ctrl.obterListaReceitas();
 		Receita receita = listaDeReceitas.getArrayList().get(0);
 		TipoID idReceita = receita.getID();
+		Estoque estoque = new Estoque();
+		
 		try
 		{
 			ctrl.destruirReceita(idReceita);
+			estoque.cadastrarDadosItem("nomeProduto", 1, "g", 200F);
+			
 		}
 		catch(Exception e)
 		{
@@ -60,33 +65,29 @@ class CtrlRUTest {
 	}
 
 	@Test
-	void testCadastrarDadosReceita() throws Exception{
+	void testCadastrarDadosIngredienteECadastrarDadosReceita() throws Exception{
 		ctrl.criarReceita("nome", "modo preparo");
 		ListaDeReceitas listaDeReceitas = ctrl.obterListaReceitas();
 		Receita receita = listaDeReceitas.getArrayList().get(0);
 		TipoID idReceita = receita.getID();
 
 		
-		Exception exception = assertThrows(Exception.class, () -> {
-			ctrl.cadastrarDadosReceita(idReceita, "test", "modo preparo", 1, 200);
-		});
-		
+		ctrl.cadastrarDadosItem("nomeProduto", 10, "g", 200F);
+		Estoque estoque = ctrl.obterListaItemEstoque();
+		TipoID idItem = estoque.getArrayList().get(0).getID();
+
+		ctrl.cadastrarDadosIngrediente(idReceita, idItem, 1, "g");
+
+
+		ctrl.cadastrarDadosReceita(idReceita, "test", "modo preparo", 1, 200);
+
+		assertEquals("test", receita.getNome());
+		assertEquals("modo preparo", receita.getModoPreparo());
+		assertFalse(receita.getIngredientes().isEmpty());
+		assertEquals(1 ,receita.getIngredientes().size());
+
 
 	}
 	
-	@Test
-	void testcadastrarDadosIngrediente() {
-		assert(true);
-	}
-
-	@Test
-	void testincluirReceita() {
-		assert(true);
-	}
-
-	@Test
-	void testobterListaReceitas() {
-		assert(true);
-	}
 
 }
