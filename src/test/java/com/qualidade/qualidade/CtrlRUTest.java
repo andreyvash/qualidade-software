@@ -2,24 +2,18 @@ package com.qualidade.qualidade;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class CtrlRUTest {
 
 	private CtrlRU ctrl;
-	ImpressoraTela impressoraTela = Mockito.mock(ImpressoraTela.class);
-	EscreveLeArquivo escreveLeArquivo = Mockito.mock(EscreveLeArquivo.class);
 
 	@BeforeEach
 	private void setUp()
