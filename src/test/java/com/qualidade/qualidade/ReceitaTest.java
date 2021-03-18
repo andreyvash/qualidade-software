@@ -17,7 +17,7 @@ class ReceitaTest {
 
 	
 	@Test
-	void deveAdicionarNovoIngrediente() 
+	void testAdicionarNovoIngrediente() 
 	{
 		id = new TipoID();
 		rec = new Receita(id, "receita_a", "modo");
